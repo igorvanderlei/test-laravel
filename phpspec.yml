@@ -1,0 +1,6 @@
+suites:
+    my_suite:
+        namespace: OrgTabajara
+        psr4_prefix: OrgTabajara
+        src_path: app
+        spec_prefix: spec

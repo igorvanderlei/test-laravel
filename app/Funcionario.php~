@@ -1,0 +1,14 @@
+<?php
+
+namespace OrgTabajara;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Funcionario extends Model
+{
+    protected $fillable = ['nome', 'apelido'];
+    
+    public function departamento() {
+			return $this->belogsTo('OrgTabajara\Departamento');    
+    }
+}

@@ -1,0 +1,22 @@
+<?php
+
+use Illuminate\Database\Seeder;
+
+class FuncionarioSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $dep1 = OrgTabajara\Departamento::find(1);
+        
+        $f1 = new OrgTabajara\Funcionario(['nome' => 'José', 'apelido' => 'ze']);
+        $dep1->funcionarios()->save($f1);
+        
+        
+        
+    }
+}
