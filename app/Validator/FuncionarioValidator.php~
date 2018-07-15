@@ -1,0 +1,17 @@
+<?php
+
+namespace OrgTabajara\Validator;
+use OrgTabajara\Funcionario;
+
+class FuncionarioValidator
+{
+    public static function validate($funcionario)
+    {
+        $validator = \Validator::make($funcionario, 
+                                      Funcionario::$rules,
+                                      Funcionario::$messages);
+        if(!$validator->errors()->isEmpty())
+      	throw new ValidationException($validator, "Erro ao validar o funcionario");
+    }
+}
+

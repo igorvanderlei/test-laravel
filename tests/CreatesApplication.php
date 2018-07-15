@@ -9,9 +9,16 @@ trait CreatesApplication
 	
 	public function setUp() {
 		parent::setUp();
-		\Artisan::call('migrate');
+		\Artisan::call('migrate:refresh');
 		\Artisan::call('db:seed');			
 	}
+	
+	public function tearDown() {
+		\Artisan::call('migrate:rollback');
+		parent::tearDown();	
+	}
+	
+	
     /**
      * Creates the application.
      *

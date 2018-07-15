@@ -6,53 +6,37 @@ use OrgTabajara\Validator\MensagemValidator;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class MensagemValidatorSpec extends ObjectBehavior
+use PhpSpec\Laravel\LaravelObjectBehavior;
+use OrgTabajara\Mensagem;
+
+class MensagemValidatorSpec extends LaravelObjectBehavior
 {
+	
+
     function it_is_initializable()
     {
         $this->shouldHaveType(MensagemValidator::class);
     }
     
+    function let() {
+    	 \Artisan::call("migrate");
+    	 \Artisan::call("db:seed");	
+	 }
+	
+    function its_funcionario_nao_pode_enviar_uma_mensagem_para_si_mesmo() {
+   	$mensagem = factory(\OrgTabajara\Mensagem::class)->make();
+		$mensagem->destinatario()->associate($mensagem->remetente);    		
+
+		$this->shouldThrow('OrgTabajara\Validator\ValidationException')
+			->duringValidate($mensagem->toArray()); 
+    }
+    
     function its_texto_deve_ter_o_minimo_de_caracteres(){
-		$texto = "Teste";
-		$titulo = "Teste de Mensagem";
-    	$remetente = "ze";
-    	$destinatario = "mane";		
-		
-		$this->shouldThrow('\InvalidArgumentException')
-			->duringValidate($titulo, $texto, $remetente, $destinatario);
-    }
-    
-    function its_texto_deve_ter_o_maximo_de_caracteres(){
-    	$faker = \Faker\Factory::create('pt_BR');
-    	$texto = $faker->realText(rand(201, 300));
-    	$titulo = "Teste de Mensagem";
-    	$remetente = "ze";
-    	$destinatario = "mane";		
+    	$mensagem = new Mensagem;
+    	$mensagem = factory(\OrgTabajara\Mensagem::class)->make();
+    	$mensagem->texto = "teste";	
     		 
-		$this->shouldThrow('\InvalidArgumentException')
-			->duringValidate($titulo, $texto, $remetente, $destinatario);    
-    }
-    function its_remetente_deve_ser_diferente_do_destinatario() {
-    	$faker = \Faker\Factory::create('pt_BR');
-    	$texto = $faker->realText(rand(11, 200));
-    	$titulo = "Teste de Mensagem";
-    	$remetente = 1;
-    	$destinatario = 1;
-    	
-    	$this->shouldThrow('\InvalidArgumentException')
-			->duringValidate($titulo, $texto, $remetente, $destinatario);    
-    
-    }
-    
-    function its_titulo_nao_nulo() {
-      $faker = \Faker\Factory::create('pt_BR');
-    	$texto = $faker->realText(rand(11, 200));
-    	$titulo = "";
-    	$remetente = 1;
-    	$destinatario = 2;
-    	
-    	$this->shouldThrow('\InvalidArgumentException')
-			->duringValidate($titulo, $texto, $remetente, $destinatario);
+		$this->shouldThrow('OrgTabajara\Validator\ValidationException')
+			->duringValidate($mensagem); 
     }
 }

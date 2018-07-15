@@ -19,6 +19,8 @@ class MensagemTest extends TestCase
 	public function testeRemetenteIgualDestinatario() {
     	$mensagem = factory(\OrgTabajara\Mensagem::class)->make();
     	$mensagem->destinatario()->associate($mensagem->remetente);
+    	var_dump($mensagem->toArray()["remetente"]);
+		var_dump($mensagem->toArray()["destinatario"]);    	
     	MensagemValidator::validate($mensagem->toArray());
 	}
 

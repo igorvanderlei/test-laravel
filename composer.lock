@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "16aa443f97af0f1f612a42062ef603f5",
+    "content-hash": "7dab4bce09df44713700beba30dc4841",
     "packages": [
         {
             "name": "behat/behat",
@@ -3487,6 +3487,60 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "benconstable/phpspec-laravel",
+            "version": "v4.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BenConstable/phpspec-laravel.git",
+                "reference": "3a504cfdae7aaefa2ee9a5ae66450022581b0caf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BenConstable/phpspec-laravel/zipball/3a504cfdae7aaefa2ee9a5ae66450022581b0caf",
+                "reference": "3a504cfdae7aaefa2ee9a5ae66450022581b0caf",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^5.4",
+                "php": "^7.0",
+                "phpspec/phpspec": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-laravel-4": "1.x-dev",
+                    "dev-2.0": "2.x-dev",
+                    "dev-3.0": "3.x-dev",
+                    "dev-master": "4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PhpSpec\\Laravel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Constable",
+                    "email": "ben@benconstable.co.uk",
+                    "homepage": "https://benconstable.co.uk"
+                }
+            ],
+            "description": "Test your Laravel applications with PhpSpec",
+            "homepage": "http://github.com/BenConstable/phpspec-laravel",
+            "keywords": [
+                "laravel",
+                "phpspec",
+                "test",
+                "testing"
+            ],
+            "time": "2018-07-12T12:05:09+00:00"
+        },
         {
             "name": "filp/whoops",
             "version": "2.2.0",

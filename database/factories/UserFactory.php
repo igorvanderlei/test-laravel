@@ -1,7 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
-
+use OrgTabajara\Mensagem;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -22,7 +22,7 @@ $factory->define(OrgTabajara\User::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(OrgTabajara\Mensagem::class, function (Faker $faker) {
+$factory->define(Mensagem::class, function (Faker $faker) {
     return [
         'titulo' => $faker->realText(rand(10, 20)),
         'texto' => $faker->realText(rand(100, 200))
@@ -30,8 +30,12 @@ $factory->define(OrgTabajara\Mensagem::class, function (Faker $faker) {
 });
 
 $factory->afterMaking(OrgTabajara\Mensagem::class, function ($mensagem, Faker $faker) {
-	$remetente = OrgTabajara\Funcionario::find($faker->numberBetween(1,4));
-	$destinatario = OrgTabajara\Funcionario::find($faker->numberBetween(1,4));
+	$id2 = $id1 = $faker->numberBetween(1,4);
+	while($id2 == $id1) {
+		$id2 = $faker->numberBetween(1,4);	
+	}
+	$remetente = OrgTabajara\Funcionario::find($id1);
+	$destinatario = OrgTabajara\Funcionario::find($id2);
 	$mensagem->remetente()->associate($remetente);
 	$mensagem->destinatario()->associate($destinatario);
 	$mensagem->save();			

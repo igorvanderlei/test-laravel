@@ -1,0 +1,25 @@
+<?php
+
+namespace Tests\Unit;
+
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use OrgTabajara\Funcionario;
+use OrgTabajara\Validator\FuncionarioValidator;
+
+class FuncionarioTest extends TestCase
+{
+	
+	/** 
+	* @expectedException OrgTabajara\Validator\ValidationException 
+	*/	
+	public function testeFuncionarioNomeInvalido() {
+    	$funcionario = new Funcionario;
+    	$funcionario->departamento = 1;
+    	$funcionario->nome = "abf";
+    	$funcionario->apelido = "abf";    	
+    	FuncionarioValidator::validate($funcionario);
+	}
+}
+

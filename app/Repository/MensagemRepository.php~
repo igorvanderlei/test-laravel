@@ -1,0 +1,8 @@
+<?php 
+
+namespace OrgTabajara\Repository;
+
+class MensagemRepository {
+
+
+}
