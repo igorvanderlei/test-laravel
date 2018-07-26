@@ -12,7 +12,7 @@ class MensagemValidator
     	$validator = Validator::make($dados, 
     										  Mensagem::$rules, 
     										  Mensagem::$message);
-    	if($dados['remetente']['id'] == $dados['destinatario']['id']) {
+    	if($dados['remetente_id'] == $dados['destinatario_id']) {
     		$validator->errors()->add('destinatario', 
     									'O destinatario deve ser diferente do remetente');
       }

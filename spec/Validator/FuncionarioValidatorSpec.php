@@ -17,11 +17,16 @@ class FuncionarioValidatorSpec extends LaravelObjectBehavior
         $this->shouldHaveType(FuncionarioValidator::class);
     }
     
+    function let() {
+    	 \Artisan::call("migrate");
+    	 //\Artisan::call("db:seed");	
+	 }
+	     
     function it_o_nome_do_funcionario_eh_obrigatorio() {
 			$funcionario = new Funcionario;
 			$funcionario->nome = "";
-			$funcionario->apelido = "igor";
-			$funcionario->departamento = 1;
+			$funcionario->apelido = "ze";
+			$funcionario->departamento_id = 1;
 			
 			$this->shouldThrow('OrgTabajara\Validator\ValidationException')
 				  ->duringValidate($funcionario->toArray());    
@@ -31,7 +36,7 @@ class FuncionarioValidatorSpec extends LaravelObjectBehavior
 			$funcionario = new Funcionario;
 			$funcionario->nome = "Igor Medeiros Vanderlei";
 			$funcionario->apelido = "";
-			$funcionario->departamento = 1;
+			$funcionario->departamento_id = 1;
 			
 			$this->shouldThrow('OrgTabajara\Validator\ValidationException')
 				  ->duringValidate($funcionario->toArray());    

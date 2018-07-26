@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => OrgTabajara\User::class,
+            'model' => OrgTabajara\Funcionario::class,
         ],
 
         // 'users' => [

@@ -19,20 +19,21 @@ class MensagemValidatorSpec extends LaravelObjectBehavior
     }
     
     function let() {
-    	 \Artisan::call("migrate");
+    	 \Artisan::call("migrate:refresh");
     	 \Artisan::call("db:seed");	
 	 }
 	
     function its_funcionario_nao_pode_enviar_uma_mensagem_para_si_mesmo() {
+ 
    	$mensagem = factory(\OrgTabajara\Mensagem::class)->make();
-		$mensagem->destinatario()->associate($mensagem->remetente);    		
+		$mensagem->destinatario_id = $mensagem->remetente_id;
 
 		$this->shouldThrow('OrgTabajara\Validator\ValidationException')
 			->duringValidate($mensagem->toArray()); 
     }
     
     function its_texto_deve_ter_o_minimo_de_caracteres(){
-    	$mensagem = new Mensagem;
+
     	$mensagem = factory(\OrgTabajara\Mensagem::class)->make();
     	$mensagem->texto = "teste";	
     		 

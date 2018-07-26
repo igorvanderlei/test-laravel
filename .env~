@@ -1,4 +1,4 @@
-APP_NAME=Laravel
+APP_NAME=Tabajara Messenger
 APP_ENV=local
 APP_KEY=base64:DckUHk8rFGq7i+E9h2ex+bN3MGfH2LaWOpb91C8958s=
 APP_DEBUG=true

@@ -15,6 +15,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('funcionario/store', 'FuncionarioController@store');
-Route::get('funcionario/store', 'FuncionarioController@store');
 
+
+Route::middleware('autorizacao')->group(function() {
+	Route::get('funcionario/create', 'FuncionarioController@create');
+	Route::get('funcionario/delete', 'FuncionarioController@delete');
+	Route::post('funcionario/store', 'FuncionarioController@store');
+	Route::get('funcionario/all', 'FuncionarioController@all');
+});
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

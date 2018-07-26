@@ -10,8 +10,9 @@ class FuncionarioValidator
         $validator = \Validator::make($dados, 
                                       Funcionario::$rules,
                                       Funcionario::$messages);
-        if(!$validator->errors()->isEmpty())
+        if(!$validator->errors()->isEmpty()) {
       	throw new ValidationException($validator, "Erro ao validar o funcionario");
+        }
     }
 }
 

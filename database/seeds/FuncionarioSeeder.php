@@ -12,15 +12,27 @@ class FuncionarioSeeder extends Seeder
     public function run()
     {
         $dep = OrgTabajara\Departamento::find(1);
+
         $f = new OrgTabajara\Funcionario(['nome' => 'José da Silva', 'apelido' => 'ze']);
+        $f->password = \Hash::make('secreto');
+        $f->remember_token = str_random(10);
         $dep->funcionarios()->save($f);
+        
         $f = new OrgTabajara\Funcionario(['nome' => 'Maria Aparecida', 'apelido' => 'maria']);
+        $f->password = \Hash::make('secreto');
+        $f->remember_token = str_random(10);
         $dep->funcionarios()->save($f);
         
         $dep = OrgTabajara\Departamento::find(2);
+        
 		  $f = new OrgTabajara\Funcionario(['nome' => 'João Mamão', 'apelido' => 'mamao']);
+        $f->password = \Hash::make('secreto');
+        $f->remember_token = str_random(10);
         $dep->funcionarios()->save($f);
+        
         $f = new OrgTabajara\Funcionario(['nome' => 'Ana Beatriz', 'apelido' => 'bia']);
+        $f->password = \Hash::make('secreto');
+        $f->remember_token = str_random(10);        
         $dep->funcionarios()->save($f);                
         
         

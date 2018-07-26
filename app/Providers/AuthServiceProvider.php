@@ -14,6 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'OrgTabajara\Model' => 'OrgTabajara\Policies\ModelPolicy',
+        'OrgTabajara\Funcionario' => 'OrgTabajara\Policies\FuncionarioPolicy',
     ];
 
     /**

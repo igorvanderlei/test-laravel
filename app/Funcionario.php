@@ -3,14 +3,18 @@
 namespace OrgTabajara;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Funcionario extends Model
+class Funcionario extends Authenticatable
 {
-    protected $fillable = ['nome', 'apelido'];
+    protected $fillable = ['nome', 'apelido', 'password', 'departamento_id'];
+    protected $hidden = ['password', 'remember_token'];
+    
     public static $rules = [
-    	'departamento' => 'required',
+    	'departamento_id' => 'required',
     	'nome' => 'required|min:10',
-    	'apelido' => 'required'
+    	'apelido' => 'required|unique:funcionarios',
+    	'password' => 'required|string|min:6|confirmed',
     ];
     
     public static $messages = [
@@ -19,7 +23,7 @@ class Funcionario extends Model
     ];
     
     public function departamento() {
-			return $this->belogsTo('OrgTabajara\Departamento');    
+			return $this->belongsTo('OrgTabajara\Departamento');    
     }
     
     public function caixasaida() {

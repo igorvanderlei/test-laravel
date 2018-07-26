@@ -16,13 +16,18 @@ class FuncionarioControllerTest extends TestCase
     public function tearDown() {
     	\Mockery::close();
     } 
-    public function testExample()
+    
+    public function testeCadastrarComDadosCorretos()
     {
     	$f = new Funcionario([
 				'nome' => "Igor Medeiros",
-				'apelido' => "Igor"    	
+				'apelido' => "Igor",	
     	]);
     	$f->departamento = 1;
+    	
+  		$dados = $f->toArray();
+    	$dados['password'] = 'secreto';
+    	$dados['password_confirmation'] = 'secreto';
     	
     	$funcionarioMock = \Mockery::mock('OrgTabajara\Funcionario');
     	$funcionarioMock->shouldReceive('save')->once();
@@ -30,22 +35,27 @@ class FuncionarioControllerTest extends TestCase
     	
     	$this->app->instance('OrgTabajara\Funcionario', $funcionarioMock);
     	
-    	$response = $this->call('POST', 'funcionario/store', $f->toarray());
-      $response->assertSee("ok");
+    	$response = $this->call('POST', 'funcionario/store', $dados);
+      $response->assertRedirect("/");
     }
     
     public function testeCadastrarComErro() {
     	$f = new Funcionario([
 				'nome' => "",
-				'apelido' => "Igor"    	
+				'apelido' => "Igor",
     	]);
-    	$f->departamento = 1;
+    	$f->departamento_id = 1;
     	
+    	$dados = $f->toArray();
+    	$dados['password'] = 'secreto';
+    	$dados['password_confirmation'] = 'secreto';
+    	    	
     	$funcionarioMock = \Mockery::mock('OrgTabajara\Funcionario');
     	$funcionarioMock->shouldNotReceive('save');
+    	
     	$this->app->instance('OrgTabajara\Funcionario', $funcionarioMock);
     	
-    	$response = $this->call('POST', 'funcionario/store', $f->toarray());
-      $response->assertSee("exception");    	
+    	$response = $this->call('POST', 'funcionario/store', $dados);
+      $response->assertRedirect("/funcionario/create");    	
     }
 }
